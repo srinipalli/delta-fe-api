@@ -15,7 +15,7 @@ class DatabaseService:
         with psycopg2.connect(**self.postgres_config) as conn:
             with conn.cursor() as cur:
                 cur.execute("""
-                    SELECT id, title, description, created_at
+                    SELECT id, title, description,Testcases_generated, created_at
                     FROM user_stories
                     ORDER BY created_at DESC
                     LIMIT 10
@@ -26,7 +26,8 @@ class DatabaseService:
                         'id': row[0],
                         'title': row[1],
                         'description': row[2],
-                        'created_at': row[3].isoformat()
+                        'Testcases_generated': row[3],
+                        'created_at': row[4].isoformat()
                     })
                 return stories
     
@@ -35,7 +36,7 @@ class DatabaseService:
         with psycopg2.connect(**self.postgres_config) as conn:
             with conn.cursor() as cur:
                 cur.execute("""
-                    SELECT id, title, description, created_at
+                    SELECT id, title, description,Testcases_generated , created_at
                     FROM user_stories
                     WHERE id = %s
                 """, (story_id,))
@@ -45,7 +46,8 @@ class DatabaseService:
                         'id': row[0],
                         'title': row[1],
                         'description': row[2],
-                        'created_at': row[3].isoformat()
+                        'Testcases_generated': row[3],
+                        'created_at': row[4].isoformat()
                     }
                 return None
     
