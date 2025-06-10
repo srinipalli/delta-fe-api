@@ -169,3 +169,8 @@ fe-api/
 ├── run.py                  # App entry point
 ├── README.md              # Documentation
 └── .gitignore             # Git ignore file
+
+
+GET http://localhost:5000/api/stories/?page=1&per_page=10
+GET http://localhost:5000/api/stories/1
+GET http://localhost:5000/api/testcases/download/1

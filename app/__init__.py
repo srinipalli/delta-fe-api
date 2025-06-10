@@ -3,6 +3,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 from app.services.db_service import DatabaseService
+from app.config import Config
 
 # Load environment variables
 load_dotenv()
@@ -12,11 +13,12 @@ def create_app():
     CORS(app)
 
     # Configure app
-    app.config.from_object('app.config.Config')
+    config = Config()
+    app.config.from_object(config)
 
     # Initialize database service
     db_service = DatabaseService(
-        postgres_config=app.config['POSTGRES_CONFIG'],
+        postgres_config=config.postgres_config,
         lance_db_path=app.config['LANCE_DB_PATH']
     )
     app.config['DB_SERVICE'] = db_service
